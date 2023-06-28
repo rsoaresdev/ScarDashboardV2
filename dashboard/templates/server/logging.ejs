@@ -1,0 +1,637 @@
+<%- include("../includes/head", { user, path, description, title: guild.name + " Dashboard" , url }) %>
+  <% if (guild.icon) { iconurl=`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`; } else {
+    iconurl=`/pics/invaild-avatar.webp`; } %>
+    <% const checked="messages" %>
+      <%- include("../includes/side_nav", { user, path, guild_name: guild.name, guild_icon: iconurl, checked_nav:
+        checked, guild }) %>
+        <div class="content">
+          <img class="server-image img" src="<%= iconurl %>" alt="<%= guild.name %>" />
+          <h1 class="server-name">
+            <%= guild.name %>
+          </h1>
+          <p class="server-description">
+            <%= guild.description %>
+          </p>
+          <style>
+            .mention {
+              background-color: #5865f24d;
+              border-radius: 3px;
+              padding: 2px;
+              color: #b9bcdd;
+              transition: 200ms;
+              line-height: 1.375rem;
+              font-weight: 800;
+              display: inline;
+              cursor: pointer;
+            }
+
+            .mention:hover {
+              background-color: #5865f2;
+              color: #fff;
+            }
+
+            .mention .emoji {
+              width: 18px;
+              vertical-align: text-bottom;
+            }
+
+            select {
+              background: #24282d;
+              border: 0;
+              padding: 5px;
+              color: #fff;
+              border-radius: 3px;
+              border: 1px solid #5865f2;
+            }
+
+            ul,
+            li {
+              margin: 0;
+              list-style-type: none;
+            }
+
+            input {
+              border: none;
+              outline: none;
+            }
+
+            select {
+              background-color: #0000001a;
+              border: 1px solid #4b4f58;
+              padding: 5px;
+              color: #fff;
+              transition: 300ms all;
+              outline: none;
+              border-radius: 3px;
+            }
+
+            option {
+              background: #24282d;
+            }
+
+            input:disabled,
+            textarea:disabled,
+            select:disabled {
+              opacity: 0.3;
+              cursor: not-allowed;
+            }
+
+            textarea {
+              border: none;
+              outline: none;
+              max-width: 100%;
+              min-width: 100%;
+              resize: vertical;
+              max-height: 200px;
+            }
+
+            input:focus,
+            textarea:focus {
+              border-color: #5865f2;
+            }
+
+            select:focus-within {
+              border: 1px solid #5865f2;
+            }
+
+            iframe {
+              border: none;
+            }
+
+            .container {
+              max-width: 1200px;
+            }
+
+            .container-contact {
+              z-index: 1;
+              width: 100%;
+              display: flex;
+              padding: 15px;
+              flex-wrap: wrap;
+              font-family: "Poppins", sans-serif;
+              background: 0 0;
+              min-height: 100vh;
+              position: relative;
+              align-items: center;
+              justify-content: center;
+            }
+
+            .contact-map {
+              top: 0;
+              left: 0;
+              z-index: -2;
+              width: 100%;
+              height: 100%;
+              position: absolute;
+            }
+
+            .wrap-contact {
+              position: relative;
+              border-radius: 10px;
+              font-family: "Poppins", sans-serif;
+              padding: 82px 180px 33px;
+            }
+
+            .contact-form {
+              width: 100%;
+              display: flex;
+              flex-wrap: wrap;
+              padding-bottom: 68px;
+              justify-content: space-between;
+              background: #1e2125;
+              padding: 5%;
+              border-radius: 10px;
+              font-weight: 300;
+            }
+
+            .contact-form-title::after {
+              content: "Contact Us";
+            }
+
+            .contact-form-title {
+              width: 100%;
+              color: #fff;
+              display: block;
+              font-size: 39px;
+              font-weight: 700;
+              font-family: "Poppins", sans-serif;
+              line-height: 1.2;
+              text-align: left;
+              padding-bottom: 44px;
+            }
+
+            .wrap-input {
+              width: 100%;
+              position: relative;
+              margin-bottom: 30px;
+            }
+
+            .rs1-wrap-input {
+              width: calc((100% - 30px) / 2);
+            }
+
+            .label {
+              color: #fff;
+              font-size: 15px;
+              font-weight: 400;
+              line-height: 1.5;
+              padding-left: 5px;
+            }
+
+            input {
+              background-color: #0000001a;
+              border: 1px solid #4b4f58;
+              transition: 300ms all;
+              padding: 10px;
+              font-family: "Poppins", sans-serif;
+              border-radius: 3px;
+              width: 100%;
+              height: 40px;
+              font-size: 16px;
+              color: #dcddde;
+              outline: none;
+            }
+
+            textarea {
+              padding-top: 9px;
+              margin-top: 10px;
+              min-height: 80px;
+              border-radius: 5px;
+              padding-bottom: 13px;
+              font-weight: 300;
+              font-family: "Poppins", sans-serif;
+              background-color: #0000001a;
+              border: 1px solid #4b4f58;
+              transition: 300ms all;
+              padding: 10px;
+              width: 100%;
+              height: 40px;
+              font-size: 16px;
+              color: #dcddde;
+              outline: none;
+            }
+
+            .container-contact-form-btn {
+              width: 100%;
+              display: flex;
+              flex-wrap: wrap;
+              margin-top: -25px;
+            }
+
+            .contact-form-btn {
+              height: 50px;
+              color: #fff;
+              display: flex;
+              font-size: 16px;
+              padding: 0 20px;
+              line-height: 1.2;
+              min-width: 160px;
+              transition: all 0.5s;
+              border-radius: 25px;
+              align-items: center;
+              justify-content: center;
+              box-shadow: 0 10px 10px 0 #0000000f;
+              background: linear-gradient(150deg, #3f3b44, #3c3748);
+            }
+
+            .contact-form-btn:hover {
+              box-shadow: 0 10px 10px 0 #1f1d2275;
+            }
+
+            .contact-form-btn:hover i {
+              transform: translateX(10px);
+            }
+
+            @media (max-width: 992px) {
+              .wrap-contact {
+                padding: 82px 80px 33px;
+              }
+            }
+
+            @media (max-width: 768px) {
+              .rs1-wrap-input {
+                width: 100%;
+              }
+            }
+
+            @media (max-width: 576px) {
+              .wrap-contact {
+                padding: 82px 15px 33px;
+              }
+
+              .container-contact {
+                display: inherit;
+              }
+
+              .contact-form-title::after {
+                font-size: 35px;
+                font-weight: 600;
+                content: "Contact Us";
+              }
+            }
+
+            .validate-input {
+              position: relative;
+            }
+
+            .alert-validate::before {
+              top: 58%;
+              right: 2px;
+              opacity: 0;
+              max-width: 70%;
+              font-size: 13px;
+              color: #c80000;
+              line-height: 1.4;
+              text-align: left;
+              visibility: hidden;
+              position: absolute;
+              border-radius: 2px;
+              pointer-events: none;
+              background-color: #fff;
+              transition: opacity 0.4s;
+              padding: 4px 25px 4px 10px;
+              transform: translateY(-50%);
+              border: 1px solid #c80000;
+              content: attr(data-validate);
+            }
+
+            .contact-more {
+              color: #757184;
+              font-size: 14px;
+              line-height: 1.5;
+            }
+
+            .contact-more-highlight {
+              color: #8a7b9d;
+            }
+
+            body.full-screen .wrap-contact {
+              width: 100%;
+              height: 100%;
+            }
+
+            body.full-screen .container-contact {
+              padding: 0;
+              width: 100%;
+              height: 100%;
+            }
+
+            body.done form>div {
+              display: none;
+            }
+
+            body.done .contact-form-title::after {
+              content: "Your message was sent!";
+            }
+          </style>
+          <% if (alert) { %>
+            <div class="banner" style="width: 80%;">
+              <div class="banner-content">
+                <div class="banner-text">
+                  <%= alert %>
+                </div>
+                <button class="banner-close" type="button">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF">
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path
+                      d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <script>
+              const close_banner = document.querySelector(".banner-close")
+              const banner = document.querySelector(".banner")
+              close_banner.addEventListener("click", function () {
+                banner.style.display = "none";
+              });
+            </script>
+            <% } %>
+              <div class="servers"
+                style="background-color: #24282d; box-shadow: 0 3px 15px 0 #0000001a, 0 1px 3px 0 #00000014;">
+                <form id="formID" role="form" action="/dashboard/<%= guild.id %>/logging" method="POST">
+                  <h2 style="margin-bottom: 10px;">Join message</h2>
+                  <div class="server">
+                    <div class="icon-and-name">
+                      <p class="guild-name">
+                        <%- include('../includes/icons/add.ejs') %> Send Message when someone join server
+                      </p>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" id="welcome_enabled" name="welcome_enabled" <%=welcome !=null ? "checked"
+                        : "" %>>
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="server <%= welcome == null ? " disabled" : "" %>" id="welcome_channel_select">
+                    <div class="icon-and-name">
+                      <p class="guild-name">
+                        <%- include('../includes/icons/tag_center.ejs') %> Channel on which the message
+                          should be sent
+                      </p>
+                    </div>
+                    <select class="select" autocomplete="off" id="select_welcome" name="welcomechannel">
+                      <option value='select_disabled' disabled selected>Select Channel</option>
+                      <option value="<%= welcome ? welcome.channelId : " null" %>" selected>Old Selection</option>
+                      <% guild.channels.cache.forEach(channel=> { %>
+                        <% if(channel.type==ChannelType.GuildText ) { %>
+                          <% if( welcome && channel.id==welcome.id) { %>
+                            <option value="<%= channel.id %>" selected>
+                              <%= channel.name %>
+                            </option>
+                            <% } else { %>
+                              <option value="<%= channel.id %>">
+                                <%= channel.name %>
+                              </option>
+                              <% } %>
+                                <% } %>
+                                  <% }) %>
+                    </select>
+                  </div>
+                  <div id="welcome_channel_select">
+                    <textarea name="msgWelcome" id="msgWelcome" placeholder="Please enter the welcome message.
+            Placeholders: {userId}, {userMention}, {guildName}, {guildMemberCount}""
+            <%=welcome ? "" : " disabled" %>><%= welcome ? welcome.welcomeMsg : "" %></textarea>
+                  </div>
+                  <h2 style="margin-bottom: 10px;">Leave message</h2>
+                  <div class="server">
+                    <div class="icon-and-name">
+                      <p class="guild-name">
+                        <%- include('../includes/icons/remove') %> Send Message when someone leave
+                          server
+                      </p>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" id="leave_enabled" name="leave_enabled" <%=leave !=null ? "checked" : ""
+                        %>>
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="server <%= leave == null ? " disabled" : "" %>" id="leave_channel_select">
+                    <div class="icon-and-name">
+                      <p class="guild-name">
+                        <%- include('../includes/icons/tag_center.ejs') %> Channel on which the message
+                          should be sent
+                      </p>
+                    </div>
+                    <select class="select" autocomplete="off" id="select_leave" name="leavechannel">
+                      <option value='select_disabled' disabled selected>Select Channel</option>
+                      <option value="<%= leave ? leave.channelId : " null" %>" selected>Old Selection</option>
+                      <% guild.channels.cache.forEach(channel=> { %>
+                        <% if(channel.type==ChannelType.GuildText ) { %>
+                          <% if(leave && channel.id==leave.id) { %>
+                            <option value="<%= channel.id %>" selected>
+                              <%= channel.name %>
+                            </option>
+                            <% } else { %>
+                              <option value="<%= channel.id %>">
+                                <%= channel.name %>
+                              </option>
+                              <% } %>
+                                <% } %>
+                                  <% }) %>
+                    </select>
+                  </div>
+                  <div <%=leave==null ? " disabled" : "" %>" id="leave_channel_select">
+                    <textarea class="input" required minlength="2" name="msgLeave" id="msgLeave" placeholder="Please enter the leave message.
+            Placeholders: {userId}, {userMention}, {guildName}, {guildMemberCount}" <%=leave ? "" : "disabled"
+                      %>><%= leave ? leave.goodbyeMsg : null %></textarea>
+                  </div>
+                  <h2 style="margin-bottom: 10px;">Edited messages</h2>
+                  <div class="server">
+                    <div class="icon-and-name">
+                      <p class="guild-name">
+                        <%- include('../includes/icons/palette') %> Send Message when someone edit
+                          a
+                          message
+                      </p>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" id="edited_enabled" name="edited_enabled" <%=edited !=null ? "checked" : ""
+                        %>>
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="server <%= edited == null ? " disabled" : "" %>" id="edited_channel_select">
+                    <div class="icon-and-name">
+                      <p class="guild-name">
+                        <%- include('../includes/icons/tag_center.ejs') %> Channel on which the
+                          message should be sent
+                      </p>
+                    </div>
+                    <select class="select" autocomplete="off" id="select_edited" name="editedchannel">
+                      <option value='<%= edited ? edited.channelId : " null" %>' selected>Old Selection</option>
+                      <% guild.channels.cache.forEach(channel=> { %>
+                        <% if(channel.type==ChannelType.GuildText ) { %>
+                          <% if(edited && channel.id==edited.id) { %>
+                            <option value="<%= channel.id %>" selected>
+                              <%= channel.name %>
+                            </option>
+                            <% } else { %>
+                              <option value="<%= channel.id %>">
+                                <%= channel.name %>
+                              </option>
+                              <% } %>
+                                <% } %>
+                                  <% }) %>
+                    </select>
+                  </div>
+                  <h2 style="margin-bottom: 10px;">Deleted messages</h2>
+                  <div class="server">
+                    <div class="icon-and-name">
+                      <p class="guild-name">
+                        <%- include('../includes/icons/palette') %> Send Message when
+                          someone
+                          delete a message
+                      </p>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" id="deleted_enabled" name="deleted_enabled" <%=deleted !=null ? "checked"
+                        : "" %>>
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="server <%= deleted == null ? " disabled" : "" %>"
+                    id="deleted_channel_select">
+                    <div class="icon-and-name">
+                      <p class="guild-name">
+                        <%- include('../includes/icons/tag_center.ejs') %> Channel on which
+                          the
+                          message should be sent
+                      </p>
+                    </div>
+                    <select class="select" autocomplete="off" id="select_deleted" name="deletedchannel">
+                      <option value='<%= deleted ? deleted.channelId : " null" %>' selected>Old Selection
+                      </option>
+                      <% guild.channels.cache.forEach(channel=> { %>
+                        <% if(channel.type==ChannelType.GuildText ) { %>
+                          <% if(deleted && channel.id==deleted.id) { %>
+                            <option value="<%= channel.id %>" selected>
+                              <%= channel.name %>
+                            </option>
+                            <% } else { %>
+                              <option value="<%= channel.id %>">
+                                <%= channel.name %>
+                              </option>
+                              <% } %>
+                                <% } %>
+                                  <% }) %>
+                    </select>
+                  </div>
+                  <h2 style="margin-bottom: 10px;">LevelUp messages</h2>
+                  <div class="server">
+                    <div class="icon-and-name">
+                      <p class="guild-name">
+                        <%- include('../includes/icons/palette') %> Send Message when
+                          someone
+                          level up
+                      </p>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" id="levelup_enabled" name="levelup_enabled" <%=levelup !=null ? "checked"
+                        : "" %>>
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="server <%= levelup == null ? " disabled" : "" %>"
+                    id="levelup_channel_select">
+                    <div class="icon-and-name">
+                      <p class="guild-name">
+                        <%- include('../includes/icons/tag_center.ejs') %> Channel on which
+                          the
+                          message should be sent
+                      </p>
+                    </div>
+                    <select class="select" autocomplete="off" id="select_levelup" name="levelupchannel">
+                      <option value='<%= levelup ? levelup.channelId : " null" %>' selected>Old Selection
+                      </option>
+                      <% guild.channels.cache.forEach(channel=> { %>
+                        <% if(channel.type==ChannelType.GuildText ) { %>
+                          <% if(levelup && channel.id==levelup.id) { %>
+                            <option value="<%= channel.id %>" selected>
+                              Old Selection
+                            </option>
+                            <% } else { %>
+                              <option value="<%= channel.id %>">
+                                <%= channel.name %>
+                              </option>
+                              <% } %>
+                                <% } %>
+                                  <% }) %>
+                    </select>
+                  </div>
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <div style="display: flex; flex-direction: row-reverse;">
+                    <button type="submit" style="margin-left: 0;font-size: 14px;width: 160px;"
+                      class="link-button blue">Save changes</button>
+                </form>
+                <script type="text/javascript">
+                  const checkbox_welcome = document.getElementById('welcome_enabled')
+                  const switch_welcome = document.getElementById('welcome_channel_select')
+                  const msgWelcome = document.getElementById('msgWelcome');
+                  checkbox_welcome.addEventListener('change', (event) => {
+                    if (event.currentTarget.checked) {
+                      switch_welcome.classList.remove("disabled")
+                      msgWelcome.disabled = false;
+                    } else {
+                      switch_welcome.classList.add("disabled")
+                      msgWelcome.disabled = true;
+                    }
+                  })
+
+                  const checkbox_leave = document.getElementById('leave_enabled')
+                  const switch_leave = document.getElementById('leave_channel_select')
+                  const msgLeave = document.getElementById('msgLeave');
+                  checkbox_leave.addEventListener('change', (event) => {
+                    if (event.currentTarget.checked) {
+                      switch_leave.classList.remove("disabled")
+                      msgLeave.disabled = false;
+
+                    } else {
+                      switch_leave.classList.add("disabled");
+                      msgLeave.disabled = true;
+                    }
+                  })
+
+                  const checkbox_edited = document.getElementById('edited_enabled')
+                  const switch_edited = document.getElementById('edited_channel_select')
+                  const select_edited = document.getElementById('select_edited');
+                  checkbox_edited.addEventListener('change', (event) => {
+                    if (event.currentTarget.checked) {
+                      edited_channel_select.classList.remove("disabled")
+                    } else {
+                      edited_channel_select.classList.add("disabled");
+                    }
+                  })
+
+                  const checkbox_deleted = document.getElementById('deleted_enabled')
+                  const switch_deleted = document.getElementById('deleted_channel_select')
+                  const select_deleted = document.getElementById('select_deleted');
+                  checkbox_deleted.addEventListener('change', (event) => {
+                    if (event.currentTarget.checked) {
+                      deleted_channel_select.classList.remove("disabled")
+                    } else {
+                      deleted_channel_select.classList.add("disabled");
+                    }
+                  })
+
+                  const checkbox_levelup = document.getElementById('levelup_enabled')
+                  const switch_levelup = document.getElementById('levelup_channel_select')
+                  const select_levelup = document.getElementById('select_levelup');
+                  checkbox_levelup.addEventListener('change', (event) => {
+                    if (event.currentTarget.checked) {
+                      levelup_channel_select.classList.remove("disabled")
+                    } else {
+                      levelup_channel_select.classList.add("disabled");
+                    }
+                  })
+                </script>
+              </div>
+        </div>
+        <%# <div class="servers"
+          style="padding: 20px; background-color: #24282d; box-shadow: 0 3px 15px 0 #0000001a, 0 1px 3px 0 #00000014;">
+          <h2 style="padding: 0; text-align: center">Examples</h2>
+          <h3 style="text-align: center">Join message</h3>
+
+          </div>%>
+          <%- include("../includes/footer") %>

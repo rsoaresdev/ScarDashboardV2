@@ -1,0 +1,21 @@
+.small_header {
+  text-align: left;
+}
+
+.tos {
+  padding: 20px 0;
+  margin: auto;
+  max-width: 800px;
+  font-family: "Poppins", sans-serif;
+  text-align: justify;
+}
+
+ul,
+li {
+  list-style: unset;
+  color: #fff;
+}
+
+.line_underline {
+  border-bottom: 1.5px solid #ffffff80;
+}

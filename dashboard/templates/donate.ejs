@@ -1,0 +1,79 @@
+<%- include("includes/head", { user, path, title: "Scar - Donate" }) %>
+  <% if (user) { %>
+    <% const checked="donate" %> <%- include("includes/side_nav_other", { user, path, checked_nav: checked }) %>
+          <% } %>
+          <div class="content" style="padding: 40px 20px 40px">
+            <div style="margin-left: 15px; margin-right: 15px" class="container-contact">
+              <div class="wrap-contact">
+                <link rel="stylesheet" type="text/css" href="/css/tos.css" />
+                <div class="tos">
+                  <h1 class="center"><b> Donate </b></h1>
+                  <p class="center">
+                    Help Scar's development by donating!<br />
+                    All donations will be used in the best way - to improve the bot's
+                    services!<br /><br />
+                  </p>
+                  <p class="center">
+                    <a href="https://www.paypal.com/donate/?hosted_button_id=J7YTX5PJSCF7U" class="link-button green">🚀
+                      Help Us (PayPal)</a>
+                  </p>
+                  <br />
+                  <hr />
+                  <h2 class="small_header"><b>Benefits of being a donator</b></h2>
+                  <p>
+                  <ul>
+                    <li>
+                      Get access to <span class="line_underline">exclusive updates!</span><br />
+                    </li>
+                    <li>
+                      Get in direct and
+                      <span class="line_underline">privileged contact with the Staff</span>
+                      team.<br />
+                    </li>
+                    <li>
+                      Receive access to participate in
+                      <span class="line_underline">exclusive giveaways!</span><br />
+                    </li>
+                    <li>
+                      Get access to
+                      <span class="line_underline">exlusive tips and suggestions</span>
+                      for developing bots!<br />
+                    </li>
+                    <li>
+                      Access to <span class="line_underline">V.I.P. channels!</span>
+                    </li>
+                  </ul>
+                  </p>
+                  <hr />
+                  <h2 class="small_header"><b>More Info</b></h2>
+                  <p>
+                  <ul>
+                    <li>
+                      <span style="font-weight: 700">Who receives the donations</span><br />By donating, you are sending
+                      any amount - via PayPal - to the
+                      bot owner, who has promised to use the donations in the best
+                      possible way and in a professional manner. <br /><br />
+                    </li>
+                    <li>
+                      <span style="font-weight: 700">Platforms available for donations</span><br />Currently we only
+                      support PayPal. Please note that if your
+                      PayPal account is not verified, the transaction may not work.<br /><br />
+                    </li>
+                    <li>
+                      <span style="font-weight: 700">Use of Donation</span><br />We use
+                      the money to cover the costs of hosting, domain, protection... We
+                      will also use the donations to further improve our services.
+                      <br /><br />
+                    </li>
+                    <li>
+                      <span style="font-weight: 700">Safety</span><br />We never have
+                      access to your debit/credit card information, or how your PayPal
+                      account information.
+                    </li>
+                    </p>
+                    <br />
+                </div>
+              </div>
+            </div>
+            <%- include("includes/footer") %>
+        </div>

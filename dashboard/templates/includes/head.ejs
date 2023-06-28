@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1d2021" />
+    <title>
+        <% if(title) { %>
+            <%- title %>
+                <% } else { %>
+                    <%- 'Scar — The only one bot you will ever need!' %>
+                        <% } %>
+    </title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" media="all">
+    
+    <%- include('./favicons.ejs') %>
+        <%- include("./seo", { user, path, description, title, url }) %>
+</head>
+
+<body>
+    <script
+        type="text/javascript">var preload = document.createElement('div'); preload.className = "preloader"; preload.innerHTML = '</div><div class="spinner"></div>'; document.body.appendChild(preload); window.addEventListener('load', function () { preload.className += ' fade'; setTimeout(function () { preload.style.display = 'none'; }, 500); })</script>
+    <noscript>
+        <div class="no-js">To view the page please enable javascript in your browser.</div>
+    </noscript>
+    <%- include("./nav", { user, path, url, name }) %>
+    <div class="blur" id="body-blur"></div>

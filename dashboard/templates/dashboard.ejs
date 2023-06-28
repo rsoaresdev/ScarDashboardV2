@@ -1,0 +1,50 @@
+<%- include("includes/head", { bot, user, path, title }) %>
+<% if (user) { %>
+<% const checked = "servers" %>
+<%- include("includes/side_nav_other", { user, path, checked_nav: checked }) %>
+<% } %>
+<div class="content">
+<link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+<h1 class="center server-emoji">^_^</h1>
+<h2>Select server</h2>
+<p class="note"><span class="bold">Info:</span> You need the <code>Manage Guild</code> permission to view your servers here.</p>
+
+ <div class="support-server-container">
+  <h3 class="support-server-header">Hey <%= user.username%>!</h3>
+  <p class="support-server-text">Join the Scar server if you haven't already! <a href="/server">Join Now!</a></p>
+ </div>
+
+  
+<div class="servers">
+<% user.guilds.forEach(guild => {
+const guild_perms = new perms(guild.permissions.toString())
+if(!guild_perms.has("ManageGuild")) return;
+%>
+
+<% if (guild.icon) {
+ iconurl = `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`;
+} else {
+ iconurl = `/pics/invaild-avatar.webp`;
+}
+%>
+<% if (!user.guilds) { %>
+ <h3><span class="bold">T^T</span> There are no servers.</h3><br>
+ <p class="note"><span class="bold">Info:</span> To add the bot you must have the <code>Manage Guild</code> permission.</p>
+<% } else { %>
+ <div class="server">
+ <div class="icon-and-name">
+ <img class="server-icon" src="<%= iconurl %>" alt="<% guild.name %>"/>
+ <p class="guild-name"><%= guild.name %> <br><span class="text-white-fade">ID: <%= guild.id %></span></p>
+ </div>
+ <% if (bot.guilds.cache.get(guild.id)) { %>
+  <a class="edit button" href="/dashboard/<%= guild.id %>">Edit Settings</a>
+ <% } else { %>
+  <a class="add button" href="<%= `https://discord.com/oauth2/authorize?client_id=${bot.user.id}&permissions=${config.permissions}&guild_id=${guild.id}&redirect_uri=https://scarbot.com/dashboard&response_type=code&scope=guilds%20identify%20bot` %>">Add Bot</a>
+
+ <% } %>
+ </div>
+ <% } %>
+<% }); %>
+</div>
+
+<%- include("includes/footer") %>

@@ -1,0 +1,191 @@
+<%- include("includes/head", { user, path, title: "Scar - Commands" }) %>
+<% if (user) { %>
+<% const checked = "commands" %>
+<%- include("includes/side_nav_other", { user, path, checked_nav: checked }) %>
+    <% } %>
+    <div style="margin-left: 20px; margin-right: 20px; margin-bottom: 50px;">
+        <section class="content">
+        <div class="commandsDivSpace">
+            <div>
+                <h2 style=" text-align: left; font-size: 50px;">Moderation</h2>
+            <h5 style="text-align: left; font-size:larger;">
+                <ul>
+                    <li><span style="font-weight: 700;">/addemoji</span> - Add an emoji to the server</li>
+                    <li><span style="font-weight: 700;">/timeout</span> - Timeout a member</li>
+                    <li><span style="font-weight: 700;">/warn</span> - Warn a member</li>
+                    <li><span style="font-weight: 700;">/ban</span> - Ban a member</li>
+                    <li><span style="font-weight: 700;">/kick</span> - Kick a member</li>
+                    <li><span style="font-weight: 700;">/clear</span> - Clear messages</li>
+                    <li><span style="font-weight: 700;">/nsfw</span>- Enables/disables age-restricted mode on a specific channel</li>
+                    <li><span style="font-weight: 700;">/slowmode</span> - Turns on/off the slow mode on a specific channel</li>
+                    <li><span style="font-weight: 700;">/announcement</span> - Broadcasts a announcement on a specific channel</li>
+                    <li><span style="font-weight: 700;">/poll</span> - Starts a poll</li>
+                    <li><span style="font-weight: 700;">/lock</span> - Locks a channel</li>
+                    <li><span style="font-weight: 700;">/unlock</span> - Unlocks a channel</li>
+                    <li><span style="font-weight: 700;">/muteall</span> - Mute or unmute all members connected to your voice channel</li>
+                    <li><span style="font-weight: 700;">/deafenall</span> - Deafen or undeafen all members connected to your voice channel</li>
+                </ul>
+            </h5>
+
+            <br><br>
+
+            <h2 style="text-align: left; font-size: 50px;">Backup</h2>
+            <h5 style="text-align: left; font-size: larger;">
+                <ul>
+                    <li><span style="font-weight: 700;">/backup create</span> - Starts to create the server backup. (It does not change anything on the server. It can only be executed by the server owner)</li>
+                    <li><span style="font-weight: 700;">/backup info</span> - View information from a backup, via its ID</li>
+                    <li><span style="font-weight: 700;">/backup load</span> - Loads the backup on the server on which the command is executed</li>
+                    <br />
+                    <li><span style="font-weight: 700;">How it works? </span>By running the command "/backup create" Scar will analyze the entire server (channels, posts, emojis, permissions and other data) and will send you a DM with a secret PIN. With this PIN you can go to another server, which you own, and where Scar is on it, and use the command "/backup load [PIN]", after executing the command you will have the last chance to confirm your choice and right after, Scar will completely delete the server where the load command was executed and start the process of copying the original server. The original server is not changed at any time.</li>
+                    <li><span style="font-weight: 700;">Who can use this? </span>This module can only be used by the owner of the server.</li>
+                    <li><span style="font-weight: 700;">Security concers: </span>Anyone with that PIN will be able to reconstruct an exact copy of your server. Be careful when managing this PIN. It is only valid for 1 use.</li>
+                    <li><span style="font-weight: 700;">Legal info: </span>Please, pay special attention to how you use this command. The Scar team is not responsible for loss of data during the loading of the backup. When you execute the "/backup load" command followed with the backup ID, there will be a confirmation message, after confirming it, it is not possible to undo it.</li>
+                    <li><span style="font-weight: 700;">Other infos: </span>Scar has to be on top of the roles and have admin permission to create and load backups.</li>
+                </ul>
+            </h5>
+            <br><br>
+
+            <h2 style="text-align: left; font-size: 50px;">Utility</h2>
+            <h5 style="text-align: left; font-size: larger;">
+                <ul>
+                    <li><span style="font-weight: 700;">/afk</span> - Enables AFK mode</li>
+                    <li><span style="font-weight: 700;">/bigemoji</span> - Generate enlarged versions of emojis using this command</li>
+                    <li><span style="font-weight: 700;">/pastebin</span> - Interact with PasteBin services. You can also use the context menu in messages, to send embed-code directly to pastebin</li>
+                    <li><span style="font-weight: 700;">/translate</span> - Translate text from one language to another</li>
+                    <li><span style="font-weight: 700;">/dictionary</span> - Look up the meaning of a certain word in the Urban Dictionary</li>
+                    <li><span style="font-weight: 700;">/rep</span> - Gives reputation to a member</li>
+                    <li><span style="font-weight: 700;">/avatar</span> - View a member's avatar in high quality</li>
+                    <li><span style="font-weight: 700;">/botinfo</span> - Bot info</li>
+                    <li><span style="font-weight: 700;">/invite</span> - Link to add the bot</li>
+                    <li><span style="font-weight: 700;">/serverinfo</span> - View information about the current server</li>
+                    <li><span style="font-weight: 700;">/userinfo</span> - View member info</li>
+                    <li><span style="font-weight: 700;">/roleinfo</span> - View information about a role</li>
+                    <li><span style="font-weight: 700;">/github</span> - Searches a member's profile on GitHub</li>
+                    <li><span style="font-weight: 700;">/help</span> - We have a problem, Huston...</li>
+                    <li><span style="font-weight: 700;">/ping</span> - View the latency of the bot</li>
+                    <li><span style="font-weight: 700;">/randomuser</span> - Sets a random server member</li>
+                    <li><span style="font-weight: 700;">/randomnumber</span> - Generates a random number between 2 numbers chosen</li>
+                    <li><span style="font-weight: 700;">/covid</span>- Shows the status of COVID-19 in a specific country or the world</li>
+                    <li><span style="font-weight: 700;">/say</span> - Make the bot say something</li>
+                </ul>                
+            </h5>
+            <br><br>
+
+
+            <h2 style="text-align: left; font-size: 50px;">Fun</h2>
+            <h5 style="text-align: left; font-size: larger;">
+                <ul>
+                    <li><span style="font-weight: 700;">/8ball</span> - Ask 8-ball a question</li>
+                    <li><span style="font-weight: 700;">/meme</span> - View a random meme</li>
+                    <li><span style="font-weight: 700;">/mchead</span> - View the head of a given Minecraft player</li>
+                    <li><span style="font-weight: 700;">/mcskin</span> - View a Minecraft skin of a certain player</li>
+                    <li><span style="font-weight: 700;">/cat</span> - Photo of a random cat </li>
+                    <li><span style="font-weight: 700;">/dog</span> - Photo of a random dog</li>
+                    <li><span style="font-weight: 700;">/hug</span> - Hugs a member</li>
+                    <li><span style="font-weight: 700;">/punch</span> - Slap a member</li>
+                    <li><span style="font-weight: 700;">/filter</span> - Adds a filter to a member's avatar or to an image (by its link). You can choose from the following options: blur, brighten, burn, darken, distort, greyscale, invert, pixelate, sepia, sharpen, threshold</li>
+                    <li><span style="font-weight: 700;">/generate</span> - Generates an image/meme from a member's avatar or to an image (by its link). You can choose from the following options: ad, affect, beautiful, bobross, challenger, confusedstonk, delete, dexter, facepalm, jail, jokeoverhead, karaba, kyon-gun, mms, notstonk, rip, stonk, tattoo, thomas, trash, wanted, worthless</li>
+                    <li><span style="font-weight: 700;">/overlay</span> - It puts an overlay to a member's avatar or to an image (by its link). You can choose from the following options: approved, brazzers, gay, halloween, rejected, thuglife, to-be-continued, wasted</li>
+                </ul>
+            </h5>
+            <br><br>
+            <h2 style="text-align: left; font-size: 50px;">Giveaways</h2>
+            <h5 style="text-align: left; font-size: larger;">
+                <ul>
+                    <li><span style="font-weight: 700;">/giveaway start</span> - Start a giveaway. Settings: channel, duration, winners, host, prize, bonus_role, required_role</li>
+                    <li><span style="font-weight: 700;">/giveaway reroll</span> - Choose another winner for a giveaway</li>
+                    <li><span style="font-weight: 700;">/giveaway end</span> - End a giveaway</li>
+                    <li><span style="font-weight: 700;">/giveaway drop</span> - Start a short giveaway (drop), where the first to react wins. Settings: channel, winners, prize</li>
+                </ul>
+            </h5>
+            <br><br>
+            <h2 style="text-align: left; font-size: 50px;">Economy</h2>
+            <h5 style="text-align: left; font-size: larger;">
+                <ul>
+                    <li><span style="font-weight: 700;">/cooldowns</span> - See the remaining cooldown of the economy commands</li>
+                    <li><span style="font-weight: 700;">/balance</span> - Current money in pocket and bank</li>
+                    <li><span style="font-weight: 700;">/deposit</span> - Deposit certain amount in the bank</li>
+                    <li><span style="font-weight: 700;">/daily</span> - Get the daily reward</li>
+                    <li><span style="font-weight: 700;">/withdraw</span> - Raising money from the bank </li>
+                    <li><span style="font-weight: 700;">/coinflip</span> - Coinflip and you can win money!</li>
+                    <li><span style="font-weight: 700;">/invest</span> - Invest a certain amount of money and after one hour you win or lose that amount!</li>
+                    <li><span style="font-weight: 700;">/pay</span> - Pay a member</li>
+                    <li><span style="font-weight: 700;">/crime</span> - Commits a crime</li>
+                    <li><span style="font-weight: 700;">/gamble</span> - Try your luck and gamble using this new economy command</li>
+                    <li><span style="font-weight: 700;">/rob</span> - Steal a member</li>
+                    <li><span style="font-weight: 700;">/dig</span> - Dig and earn money</li>
+                    <li><span style="font-weight: 700;">/work</span>- Work and get a random amount of money</li>
+                    <li><span style="font-weight: 700;">/votereward</span> - Get the daily vote reward</li>
+                    <li><span style="font-weight: 700;">/leaderboard-eco</span> - Server Earnings Ranking Table</li>
+                    <li><span style="font-weight: 700;">/addmoney</span> - Add money to a member (admins only)</li>
+                    <li><span style="font-weight: 700;">/removemoney</span> - Remove money from a member (admins only)</li>
+                    <li><span style="font-weight: 700;">/shop</span> - Prices of my shop</li>
+                </ul>               
+            </h5>
+            <br><br>
+
+            <h2 style="text-align: left; font-size: 50px;">Tags</h2>
+            <h5 style="text-align: left; font-size: larger;">
+                <ul>
+                    <li><span style="font-weight: 700;">/tag view</span> - View a tag (/tag view [name]) </li>
+                    <li><span style="font-weight: 700;">/tag info</span> - View info about a tag </li>
+                    <li><span style="font-weight: 700;">/tag create</span> - Create a tag (only for admins) </li>
+                    <li><span style="font-weight: 700;">/tag delete</span> - Delete a tag (only for admins) </li>
+                    <li><span style="font-weight: 700;">/tag edit</span> - Edit a tag (only for admins) </li><br/>
+                    <li><span style="font-weight: 700;">What it is used for?</span> The tagging system serves to organize and categorize information within the server. Administrators can configure multiple tags with names, descriptions, embed color and associated content. And, users can use the "/tag view [name]" command to view the tag content. This facilitates information management, quick access, and efficient collaboration. </li>
+                </ul>
+            </h5>
+            <br><br>
+
+
+            <h2 style="text-align: left; font-size: 50px;">Ranks & XP</h2>
+            <h5 style="text-align: left; font-size: larger;">
+                <ul>
+                    <li><span style="font-weight: 700;">/rank</span> - View the rank of a member </li>
+                    <li><span style="font-weight: 700;">/leaderboard-xp</span> - Ranking table of xp server</li>
+                </ul>
+            </h5>
+            <br><br>
+
+            <h2 style="text-align: left; font-size: 50px;">Reaction Roles</h2>
+            <h5 style="text-align: left; font-size: larger;">
+                <ul>
+                    <li><span style="font-weight: 700;">/rradd</span> - Add a role to the panel </li>
+                    <li><span style="font-weight: 700;">/rrpanel</span> - View the Reaction Role panel </li>
+                    <li><span style="font-weight: 700;">/rrdelete</span> - Deletes the Reaction Role panel</li>
+                </ul>
+            </h5>
+            <br><br>
+
+            <h2 style="text-align: left; font-size: 50px;">Tickets</h2>
+            <h5 style="text-align: left; font-size: larger;">
+                <ul>
+                    <li><span style="font-weight: 700;">/ticket</span> - This command only configures the ticket panel design. The rest of the settings, such as the opening and closing category must be configured via the dashboard.</li>
+                </ul>
+            </h5>
+            <br><br>
+
+            <h2 style="text-align: left; font-size: 50px;">Context Menu</h2>
+            <h5 style="text-align: left; font-size: larger;">
+                <ul>
+                    <li><span style="font-weight: 700;">Translate to English</span> - In messages</li>
+                    <li><span style="font-weight: 700;">Post to sourceb.in</span> - In messages</li>
+                    <li><span style="font-weight: 700;">Get userinfo</span> - In members profiles</li>
+                    <li><span style="font-weight: 700;">View member avatar</span> - In members profiles</li>
+                </ul>
+            </h5>
+            <br><br>
+
+            <h2 style="text-align: left; font-size: 50px;">Developers Only</h2>
+            <h5 style="text-align: left; font-size: larger;">
+                <ul>
+                    <li><span style="font-weight: 700;">/blacklist</span> - Manages the blacklist module</li>
+                    <li><span style="font-weight: 700;">/eval</span> - Executes JavaScript code</li>
+                    <li><span style="font-weight: 700;">/serverslist</span> - Shows the complete list of all servers the bot is on, as well as some important information for debugging, statistics and support</li>
+                </ul>
+            </h5>
+            <br><br>
+    </div>
+    </section>
+    </div>
+    <%- include("includes/footer") %>

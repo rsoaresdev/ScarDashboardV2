@@ -1,0 +1,70 @@
+<nav class="nav" role="navigation">
+  <div style="
+      inset: 0;
+      z-index: -1;
+      position: absolute;
+      backdrop-filter: blur(5px);
+      opacity: 1;
+      "></div>
+  <a class="avatar-container-bot logo" href="/" rel="noopener" aria-label="Open home page"><img class="user-avatar"
+      src="/pics/scarAvatarRounder.webp" alt="Logo Scar" style="margin-right: 10px" />
+        <span class="name">Scar</span></a>
+  <input title="checkbox" label="checkbox" class="menu-btn" type="checkbox" id="menu-btn" />
+  <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  <ul class="menu">
+      <li><a href="/invite" target="_blank" rel="noopener noreferrer">Invite</a></li>
+      <li><a href="/server" target="_blank" rel="noopener noreferrer">Support</a></li>
+      <li><a href="/commands" target="_self" rel="noopener noreferrer">Commands</a></li>
+      <li><a href="https://scarbot.betteruptime.com/" target="_blank" rel="noopener noreferrer">Status</a></li>
+      <li><a href="/terms" target="_self" rel="noopener noreferrer">ToS</a></li>
+      <li><a href="/privacy" target="_self" rel="noopener noreferrer">PP</a></li>
+    <% if (user) { %>
+      <% if (user.avatar) { avatar=`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`; } else {
+        avatar=`/pics/invaild-avatar.webp`; } %>
+        <a class="avatar-container dropdownHead" id="dropdownHead" onclick="dropdown(this)"><img class="user-avatar"
+            alt="userAvatar" src="<%= avatar %>" /><span class="user-name">
+            @<%= user.username %>
+          </span></a>
+        <% } else { %>
+          <li>
+            <a href="/login" class="button_empty" style="margin: 13px">Login</a>
+            <% } %>
+          </li>
+  </ul>
+  <% if(user) { %>
+    <ul class="dropdown" id="dropdown">
+      <div style="
+         inset: 0;
+         z-index: -1;
+         position: absolute;
+         backdrop-filter: blur(5px);
+         opacity: 1;
+         "></div>
+      <div class="cross-container">
+        <div class="cross"></div>
+      </div>
+      <% if (path==="/dashboard" ) { %>
+        <span><a class="dropdown-li" href="/">
+            <%- include('./icons/home.ejs') %> Home
+          </a></span>
+        <% } else if (path !=="/" ) { %>
+          <span><a class="dropdown-li" href="/">
+              <%- include('./icons/home.ejs') %> Home
+            </a></span>
+          <span><a class="dropdown-li" href="/dashboard">
+              <%- include('./icons/dashboard-nav.ejs') %> Dashboard
+            </a></span>
+          <% } else { %>
+            <span><a class="dropdown-li" href="/dashboard">
+                <%- include('./icons/dashboard-nav.ejs') %> Dashboard
+              </a></span>
+            <% } %>
+              <span><a class="dropdown-li" href="/profile">
+                  <%- include('./icons/profile.ejs') %> Profile
+                </a></span>
+              <span><a class="dropdown-li logout" href="/logout" class="logout">
+                  <%- include('./icons/logout.ejs') %> Logout
+                </a></span>
+    </ul>
+    <% } %>
+</nav>

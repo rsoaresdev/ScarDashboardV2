@@ -1,0 +1,25 @@
+<link rel="stylesheet" type="text/css" href="/css/sidenav.css" />
+<div class="open-sidenav"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg></div>
+<div class="sidenav">
+<div style="inset: 0; z-index: -1; position: absolute; backdrop-filter: blur(5px); opacity: 1;"></div>
+<img class="server-avatar img " src="<%= guild_icon %>" alt="<%= guild_name %>"/>
+<h3 class="sidenav-header"><%= guild_name %></h3>
+<hr class="hr-edited">
+<a href="/dashboard/<%= guild.id %>" class="guildname <% if(checked_nav == "home") { %>checked<% } %>"><%- include('./icons/home-sidenav.ejs') %> Home</a>
+<a href="/dashboard/<%= guild.id %>/automod" class="guildname <% if(checked_nav == "automod") { %>checked<% } %>"><%- include('./icons/automod.svg') %> AutoMod</a>
+<a href="/dashboard/<%= guild.id %>/logging" class="guildname <% if(checked_nav == "messages") { %>checked<% } %>"><%- include('./icons/message-sidenav.ejs') %> Logging</a>
+<a href="/dashboard/<%= guild.id %>/tickets" class="guildname <% if(checked_nav == "tickets") { %>checked<% } %>"><%- include('./icons/tag.ejs') %> Tickets</a>
+<a href="/dashboard/<%= guild.id %>/roles" class="guildname <% if(checked_nav == "roles") { %>checked<% } %>"><%- include('./icons/role-sidenav.ejs') %> Roles</a>
+<div class="position-bottom">
+<a href="https://status.scarbot.com" class="bottom-item" style="float: right"><%- include('./icons/signal.ejs') %> Status</a>
+</div>
+</div>
+<script>
+   document.addEventListener("click", function (event) {
+ if (event.target.tagName !== "A" || !event.target.href || event.target.classList !== "guildname") return;
+ const currentElement = document.getElementsByClassName("checked")[0];
+ const content = document.getElementsByClassName("content")[0];
+  currentElement.classList.remove("checked");
+  event.target.classList.add("checked");
+ });
+</script>

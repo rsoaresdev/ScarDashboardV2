@@ -1,0 +1,122 @@
+<%- include("../includes/head", { user, path, description, title: guild.name + " Dashboard" , url }) %>
+  <link rel="stylesheet" type="text/css" href="/css/server.css" />
+  <% if (guild.icon) { iconurl=`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`; } else {
+    iconurl=`/pics/invaild-avatar.webp`; } %>
+    <% const checked="home" %>
+      <%- include("../includes/side_nav", { user, path, guild_name: guild.name, guild_icon: iconurl, checked_nav:
+        checked, guild }) %>
+        <div class="content">
+          <% function checkdays(date) { let now=new Date(); let diff=now.getTime() - date.getTime(); let
+            days=Math.floor(diff / 86400000); return days + (days==1 ? " day" : " days" ) + " ago" ; } %>
+            <img class="server-image img" src="<%= iconurl %>" alt="<%= guild.name %>" />
+            <h1 class="server-name">
+              <%= guild.name %>
+            </h1>
+            <p class="server-description">
+              <%= guild.description %>
+            </p>
+            <hr>
+            <h2 style="text-align: center"> </h2>
+            <% if (alert) { %>
+              <div class="banner">
+                <div class="banner-content">
+                  <div class="banner-text">
+                    <%= alert %>
+                  </div>
+                  <button class="banner-close" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                      fill="#FFFFFF">
+                      <path d="M0 0h24v24H0z" fill="none" />
+                      <path
+                        d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <script>
+                const close_banner = document.querySelector(".banner-close")
+                const banner = document.querySelector(".banner")
+                close_banner.addEventListener("click", function () {
+                  banner.style.display = "none";
+                });
+              </script>
+              <% } %>
+                <div class="all">
+                  <div class="grid-2">
+                    <form id="formID" role="form" action="/dashboard/<%= guild.id %>/" method="POST">
+                      <h2 style="margin-bottom: 0;">In-Scar Configuration</h2>
+                      <p>Change the bot's nickname in the current server</p>
+                      <input id="nickname" name="nickname" type="text" required="true"
+                        placeholder="Scar"
+                        value="Scar" />
+                      <p>Change the bot's language in the current server</p>
+                      <select class="select" autocomplete="off" id="selectLanguage" name="selectLanguage" required>
+                        <option value="" selected disabled>Select a language</option>
+                        <option value="english">
+                          English
+                        </option>
+                        <option value="portuguese">
+                          Portuguese
+                        </option>
+                        <option value="spanish">
+                          Spanish
+                        </option>
+                        <option value="french">
+                          French
+                        </option>
+                      </select>
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                      <button type="submit" style="float: right" class="link-button-v2 blue">Save changes</button>
+                    </form>
+                  </div>
+                  <div class="boxes grid-1">
+                    <div class="box box1">
+                      <div class="boxcontainter">
+                        <h3 class="boxheader">
+                          <%= guild.memberCount %>
+                        </h3>
+                        <p class="heading">Members</p>
+                      </div>
+                    </div>
+                    <div class="box box2">
+                      <div class="boxcontainter">
+                        <h3 class="boxheader">
+                          <%= guild.channels.cache.size %>
+                        </h3>
+                        <p class="heading">Channels</p>
+                      </div>
+                    </div>
+                    <div class="box box3">
+                      <div class="boxcontainter">
+                        <h3 class="boxheader">
+                          <%= guild.roles.cache.size %>
+                        </h3>
+                        <p class="heading">Roles</p>
+                      </div>
+                    </div>
+                    <div class="box box4">
+                      <div class="boxcontainter">
+                        <h3 class="boxheader">
+                          <%= guild.premiumSubscriptionCount %> (<%=
+                              guild.premiumTier.toString().toLowerCase().replace("none", "0" ).replace("tier_", "" ) %>
+                              level)
+                        </h3>
+                        <p class="heading">Boosts</p>
+                      </div>
+                    </div>
+                    <% owner_str=guild_owner.user.username.toString() %>
+                      <p class="sinfo">
+                        <%- include('../includes/icons/members.ejs') %> Members: <%= guild.memberCount %>
+                            <p class="server-owner sinfo" title="ID: <%= guild.ownerId %>">
+                              <%- include('../includes/icons/owner.ejs') %> Owner: <%= owner_str.substring(0, 11) +
+                                  (owner_str.length> 11 ? "..." : "") %>#<%= guild_owner.user.discriminator %>
+                            </p>
+                            <p class="server-time sinfo" title="<%= guild.createdAt.toUTCString().substr(0, 16)%>">
+                              <%- include('../includes/icons/date.ejs') %> Created: <%= checkdays(guild.createdAt) %>
+                            </p>
+                            <p class="region sinfo">
+                              <%- include('../includes/icons/location.ejs') %> Location: <%= guild.preferredLocale %>
+                            </p>
+                  </div>
+                </div>
+                <%- include("../includes/footer") %>

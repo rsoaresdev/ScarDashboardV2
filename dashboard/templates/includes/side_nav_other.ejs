@@ -1,0 +1,36 @@
+<link rel="stylesheet" type="text/css" href="/css/sidenav.css" />
+<% if (user.avatar) {
+ iconurl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`
+} else {
+ iconurl = `/pics/invaild-avatar.webp`;
+}
+%>
+<div class="open-sidenav"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg></div>
+<div class="sidenav">
+<div style="inset: 0; z-index: -1; position: absolute; backdrop-filter: blur(5px); opacity: 1;"></div>
+<img class="server-avatar img " src="<%= iconurl %>" alt="<%= user.username %>"/>
+<h3 class="sidenav-header">@<%= user.username %></h3>
+<hr class="hr-edited">
+<a href="/" class="guildname <% if(checked_nav == "home") { %>checked<% } %>"><%- include('./icons/home-sidenav.ejs') %> Home</a>
+<a href="/dashboard" class="guildname <% if(checked_nav == "servers") { %>checked<% } %>"><%- include('./icons/dashboard-nav.ejs') %> Manage Servers</a>
+<a href="/profile" class="guildname <% if(checked_nav == "profile") { %>checked<% } %>"><%- include('./icons/profile.ejs') %> Profile</a>
+<a href="/support" class="guildname <% if(checked_nav == "contact") { %>checked<% } %>"><%- include('./icons/embeds-sidenav.ejs') %> Contact</a>
+<a href="/commands" class="guildname <% if(checked_nav == "commands") { %>checked<% } %>"><%- include('./icons/command.svg') %> Commands</a>
+<a href="/donate" class="guildname <% if(checked_nav == "donate") { %>checked<% } %>"><%- include('./icons/money.svg') %> Donate</a>
+<a href="/terms" class="guildname <% if(checked_nav == "terms") { %>checked<% } %>"><%- include('./icons/terms.svg') %> Terms of Use</a>
+<a href="/privacy" class="guildname <% if(checked_nav == "privacy") { %>checked<% } %>"><%- include('./icons/privacy.svg') %> Privacy Policy</a>
+<div class="position-bottom">
+<a href="https://status.scarbot.com" class="bottom-item" style="float: right"><%- include('./icons/signal.ejs') %> Status</a>
+</div>
+</div>
+<script>
+   document.addEventListener("click", function (event) {
+ if (event.target.tagName !== "A" || !event.target.href || event.target.classList !== "guildname") return;
+ const currentElement = document.getElementsByClassName("checked")[0];
+ const content = document.getElementsByClassName("content")[0];
+  currentElement.classList.remove("checked");
+  event.target.classList.add("checked");
+ });
+
+
+</script>

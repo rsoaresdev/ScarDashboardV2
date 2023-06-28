@@ -1,0 +1,195 @@
+<%- include("../includes/head", { user, path, description, title: guild.name + " Dashboard" , url }) %>
+    <% if (guild.icon) { iconurl=`https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`; } else {
+        iconurl=`/pics/invaild-avatar.webp`; } %>
+        <% const checked="automod" %>
+            <%- include("../includes/side_nav", { user, path, guild_name: guild.name, guild_icon: iconurl,
+                checked_nav: checked, guild }) %>
+                <div class="content">
+                    <img class="server-image img" src="<%= iconurl %>" alt="<%= guild.name %>" />
+                    <h1 class="server-name">
+                        <%= guild.name %>
+                    </h1>
+                    <p class="server-description">
+                        <%= guild.description %>
+                    </p>
+
+                    <style>
+                        .mention {
+                            background-color: #5865f24d;
+                            border-radius: 3px;
+                            padding: 2px;
+                            color: #b9bcdd;
+                            transition: 200ms;
+                            line-height: 1.375rem;
+                            font-weight: 800;
+                            display: inline;
+                            cursor: pointer;
+                        }
+
+                        .mention:hover {
+                            background-color: #5865f2;
+                            color: #fff;
+                        }
+
+                        .mention .emoji {
+                            width: 18px;
+                            vertical-align: text-bottom;
+                        }
+
+                        select {
+                            background: #24282d;
+                            border: 0;
+                            padding: 5px;
+                            color: #fff;
+                            border-radius: 3px;
+                            border: 1px solid #5865f2;
+                        }
+                    </style>
+                    <% if (alert) { %>
+                        <div class="banner" style="width: 80%;">
+                            <div class="banner-content">
+                                <div class="banner-text">
+                                    <%= alert %>
+                                </div>
+                                <button class="banner-close" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24"
+                                        width="24px" fill="#FFFFFF">
+                                        <path d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <script>
+                            const close_banner = document.querySelector(".banner-close")
+                            const banner = document.querySelector(".banner")
+                            close_banner.addEventListener("click", function () {
+                                banner.style.display = "none";
+                            });
+                        </script>
+                        <% } %>
+                            <div class="servers" style="background-color: #24282d; box-shadow: 0 3px 15px 0 #0000001a, 0 1px 3px 0 #00000014;">
+                                <form id="formID" role="form" action="/dashboard/<%= guild.id %>/automod" method="POST">
+                                    <h2 style="margin-bottom: 10px;">Anti Invite</h2>
+                                    <div class="server">
+                                        <div class="icon-and-name">
+                                            <p class="guild-name">
+                                                <%- include('../includes/icons/group_add.ejs') %> Enable anti-invite
+                                                    system
+                                            </p>
+                                        </div>
+                                        <label class="switch">
+                                            <input type="checkbox" id="antiinvite_enabled" name="antiinvite_enabled" <%=antiinvite !=null ? "checked" : "" %>>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+
+                                    <h2 style="margin-bottom: 10px;">Profanity, Sexual Content and Insults</h2>
+                                    <div class="server">
+                                        <div class="icon-and-name">
+                                            <p class="guild-name">
+                                                <%- include('../includes/icons/automod.svg') %> Block Profanity
+                                            </p>
+                                        </div>
+                                        <label class="switch">
+                                            <input type="checkbox" id="profanity_enabled" name="profanity_enabled" <%=profanity ? "checked" : "" %>>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+
+                                    <div class="server">
+                                        <div class="icon-and-name">
+                                            <p class="guild-name">
+                                                <%- include('../includes/icons/automod.svg') %> Block Insults & Slurs
+                                            </p>
+                                        </div>
+                                        <label class="switch">
+                                            <input type="checkbox" id="insults_enabled" name="insults_enabled" <%=insults ? "checked" : "" %>>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+
+
+                                    <div class="server">
+                                        <div class="icon-and-name">
+                                            <p class="guild-name">
+                                                <%- include('../includes/icons/automod.svg') %> Block Sexual Content
+                                            </p>
+                                        </div>
+                                        <label class="switch">
+                                            <input type="checkbox" id="sexualcontent_enabled" name="sexualcontent_enabled" <%=sexualcontent ? "checked" : "" %>>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+
+
+                                    <h2 style="margin-bottom: 10px;">Auto Role</h2>
+                                    <div class="server">
+                                        <div class="icon-and-name">
+                                            <p class="guild-name">
+                                                <%- include('../includes/icons/group_add.ejs') %> Enable auto-role
+                                                    system
+                                            </p>
+                                        </div>
+
+                                        <label class="switch">
+                                            <input type="checkbox" id="autorole_enabled" name="autorole_enabled" <%=autorole !=null ? "checked" : "" %>>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div id="autoroleselectrole" class="server <%= autorole == null ? " disabled" : ""
+                                        %>"
+                                        id="autorole_role_select">
+                                        <div class="icon-and-name">
+                                            <p class="guild-name">
+                                                <%- include('../includes/icons/tag_center.ejs') %> Selects the role that
+                                                    will be
+                                                    assigned when a member joins the server
+                                            </p>
+                                        </div>
+                                        <select class="select" autocomplete="off" id="autorole_role"
+                                            name="autorole_role" required>
+                                            <option value='' disabled>Select Role</option>
+                                            <% guild.roles.cache.forEach(role=> { %>
+                                                <% if (role.id !==guild.id && !role.tags?.botId) { %>
+                                                    <option value="<%= role.id %>">
+                                                        <%= role.name %>
+                                                    </option>
+                                                    <% } %>
+                                                        <% }) %>
+                                        </select>
+                                    </div>
+                            </div>
+
+
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <div style="display: flex; flex-direction: row-reverse;">
+                                <button id="submitbutt" type="submit"
+                                    style="margin-left: 0;font-size: 14px;width: 160px;" class="link-button blue">Save
+                                    changes</button>
+                                </form>
+
+                                <script type="text/javascript">
+                                    const switch_autorole = document.getElementById('autorole_enabled')
+                                    const autorolerole = document.getElementById('autoroleselectrole');
+                                    switch_autorole.addEventListener('change', (event) => {
+                                        if (event.currentTarget.checked) {
+                                            autorolerole.classList.remove("disabled")
+                                            autorolerole.disabled = false;
+                                        } else {
+                                            autorolerole.classList.add("disabled")
+                                            autorolerole.disabled = true;
+                                        }
+                                    })
+                                </script>
+
+                            </div>
+                </div>
+                <%# <div class="servers"
+                    style="padding: 20px; background-color: #24282d; box-shadow: 0 3px 15px 0 #0000001a, 0 1px 3px 0 #00000014;">
+                    <h2 style="padding: 0; text-align: center">Examples</h2>
+                    <h3 style="text-align: center">Join message</h3>
+
+                    </div>%>
+                    <%- include("../includes/footer") %>

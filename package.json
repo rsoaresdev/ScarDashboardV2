@@ -1,0 +1,33 @@
+{
+  "name": "dsc-dashboard",
+  "version": "2.2.0",
+  "description": "dscDashboard",
+  "author": "SirRamboia",
+  "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "csurf": "^1.11.0",
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "express-session": "^1.17.3",
+    "helmet": "^7.0.0",
+    "memorystore": "^1.6.7",
+    "moment": "^2.29.4",
+    "mongoose": "^7.3.1",
+    "passport": "^0.6.0",
+    "passport-discord": "^0.1.4",
+    "rate-limiter-flexible": "^2.4.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.43.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
+  }
+}

@@ -1,0 +1,26 @@
+.support-server-container {
+  padding: 16px;
+  margin: 8px;
+  border-radius: 5px;
+  background-color: #5865f233;
+  border: 1px solid #5865f266;
+}
+
+.support-server-header {
+  color: #fff;
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-family: "Poppins", sans-serif;
+}
+
+.support-server-text {
+  margin: 0;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  color: #aeaeae;
+}
+
+.text-white-fade {
+  color: #cbcbcba7;
+}
