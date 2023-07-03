@@ -211,11 +211,15 @@ module.exports = (app, client, config, express) => {
   });
   // Index endpoint.
   app.get('/terms', (req, res) => {
-    renderTemplate(res, req, 'terms.ejs');
+    res.redirect(
+      `https://docs.scarbot.com/legal/tos`,
+    );
   });
   // Index endpoint.
   app.get('/privacy', (req, res) => {
-    renderTemplate(res, req, 'privacy.ejs');
+    res.redirect(
+      `https://docs.scarbot.com/legal/privacy`,
+    );
   });
   // Dashboard endpoint.
   app.get('/dashboard', checkAuth, (req, res) => {
