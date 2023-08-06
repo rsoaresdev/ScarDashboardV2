@@ -56,7 +56,6 @@ client.once('ready', async () => {
     referrerPolicy: {
       policy: 'same-origin',
     },
-    contentSecurityPolicy: false,
   }));
   app.use(ratelimit);
   app.use(cookieParser());
