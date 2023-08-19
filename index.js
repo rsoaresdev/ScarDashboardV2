@@ -46,11 +46,6 @@ client.once('ready', async () => {
 
   app.use(compression({ threshold: 0 }));
   app.set('trust proxy', 1);
-  app.use(helmet({
-    strictTransportSecurity: {
-      maxAge: 31536000,
-    }
-  }));
   app.use(ratelimit);
   app.use(cookieParser());
   [, app.locals.domain] = process.env.DOMAIN.split('//');
