@@ -1,6 +1,7 @@
 {
   "name": "Scar",
   "short_name": "Scar",
+  "start_url": "https://scarbot.com",
   "icons": [
     {
       "src": "/favicon/faviconPNG.png",
