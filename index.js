@@ -49,6 +49,11 @@ client.once('ready', async () => {
   app.use(helmet.xssFilter());
   app.use(helmet.frameguard({ action: 'deny' }));
   
+  // Permitir iframes do domínio "top.gg"
+  app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy', "frame-ancestors 'self' https://top.gg");
+    next();
+  });
   
   app.use(compression({ threshold: 0 }));
   app.set('trust proxy', 1);
