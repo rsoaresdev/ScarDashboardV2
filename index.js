@@ -44,6 +44,17 @@ client.login(process.env.TOKEN);
 client.once('ready', async () => {
   console.log('> Client connected!');
 
+  // Configuração do Helmet para melhorar a segurança
+  app.use(helmet.hsts());
+  app.use(helmet.xssFilter());
+  app.use(helmet.frameguard({ action: 'deny' }));
+  
+  // Permitir iframes do domínio "top.gg"
+  app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy', "frame-ancestors 'self' https://top.gg");
+    next();
+  });
+  
   app.use(compression({ threshold: 0 }));
   app.set('trust proxy', 1);
   app.use(ratelimit);
