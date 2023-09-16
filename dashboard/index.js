@@ -849,7 +849,7 @@ module.exports = (app, client, config, express) => {
           if (dataTicketSchema) await dataTicketSchema.deleteOne();
         }
         if (data.categoryopen_enabled) {
-          const dataTicketOpenSchema = SchemaTicketOpen.findOne({ serverId: guild.id });
+          const dataTicketOpenSchema = await SchemaTicketOpen.findOne({ serverId: guild.id });
           if (dataTicketOpenSchema) {
             dataTicketOpenSchema.category = dataTicketOpen;
             await dataTicketOpenSchema.save();
@@ -860,7 +860,7 @@ module.exports = (app, client, config, express) => {
             }).save();
           }
         } else {
-          const dataTicketOpenSchema = SchemaTicketOpen.findOne({ serverId: guild.id });
+          const dataTicketOpenSchema = await SchemaTicketOpen.findOne({ serverId: guild.id });
           if (dataTicketOpenSchema) dataTicketOpenSchema.deleteOne();
         }
 
